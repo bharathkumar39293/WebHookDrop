@@ -1,0 +1,12 @@
+{
+    "name": "webhookdrop",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "install:all": "npm install --workspaces",
+        "build": "npm run build --workspaces",
+        "start": "npm run start --workspace api"
+    }
+}

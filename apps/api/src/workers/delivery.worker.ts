@@ -3,14 +3,7 @@ import axios from 'axios';
 import { db } from '../db/client';
 import { getBackoffDelay } from '../lib/backoff';
 import { signPayload } from '../lib/hmac';
-import dotenv from 'dotenv';
-dotenv.config();
-
-const connection = process.env.REDIS_URL || {
-    host: process.env.REDIS_HOST || 'localhost',
-    port: parseInt(process.env.REDIS_PORT || '6381', 10),
-    password: process.env.REDIS_PASSWORD,
-};
+import { redisConnection } from '../lib/redis';
 
 export const deliveryWorker = new Worker('deliveries', async (job: Job) => {
     const { deliveryId, endpointUrl, secret, payload, attempt, maxAttempts } = job.data;
@@ -66,4 +59,4 @@ export const deliveryWorker = new Worker('deliveries', async (job: Job) => {
             return; // Return so BullMQ doesn't try to handle failure for a moved job
         }
     }
-}, { connection: connection as any });
+}, { connection: redisConnection as any });

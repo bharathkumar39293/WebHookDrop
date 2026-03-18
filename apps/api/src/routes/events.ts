@@ -46,7 +46,8 @@ router.post('/', async (req, res) => {
 
         res.status(202).json({ id: eventId, deliveryCount });
     } catch (err: any) {
-        res.status(500).json({ error: err.message });
+        console.error('Error in /events:', err);
+        res.status(500).json({ error: err.message, detail: err.detail });
     }
 });
 

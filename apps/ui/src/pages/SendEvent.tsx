@@ -15,7 +15,8 @@ const SendEvent: React.FC = () => {
             setResult(res);
             setTimeout(() => setResult(null), 5000);
         } catch (err: any) {
-            alert('Invalid JSON or server error: ' + err.message);
+            const errorMsg = err.response?.data?.error || err.message;
+            alert('Server Error: ' + errorMsg);
         } finally {
             setSubmitting(false);
         }

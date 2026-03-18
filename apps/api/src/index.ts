@@ -8,6 +8,11 @@ import './workers/delivery.worker'; // Import worker to start it up
 
 const app = express();
 
+console.log('--- WebhookDrop Startup ---');
+console.log('DB URL:', process.env.DATABASE_URL ? `${process.env.DATABASE_URL.substring(0, 15)}...` : 'NOT SET (using local default)');
+console.log('Redis URL:', process.env.REDIS_URL ? `${process.env.REDIS_URL.substring(0, 15)}...` : 'NOT SET (using local default)');
+console.log('---------------------------');
+
 app.use(cors());
 app.use(express.json());
 

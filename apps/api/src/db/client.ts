@@ -4,4 +4,5 @@ dotenv.config();
 
 export const db = new Pool({
     connectionString: process.env.DATABASE_URL || 'postgres://user:password@localhost:5434/webhookdrop',
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });

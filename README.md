@@ -20,9 +20,12 @@ graph LR
     E -- Fail? --> D
 ```
 
-## 🚀 Quick Start (Local)
+### 1. Start Infrastructure (Cloud)
+If deploying to **Render**, use these settings:
+- **Build Command:** `npm install && npm run build`
+- **Start Command:** `npm start`
 
-### 1. Start Infrastructure
+### 2. Start Infrastructure (Local)
 ```bash
 docker-compose up -d
 ```

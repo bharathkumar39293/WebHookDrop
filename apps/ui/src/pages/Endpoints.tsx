@@ -34,8 +34,9 @@ const Endpoints: React.FC = () => {
             setSecret('');
             setLabel('');
             await loadEndpoints();
-        } catch (err) {
-            alert('Failed to register endpoint');
+        } catch (err: any) {
+            const errorMsg = err.response?.data?.error || err.message;
+            alert('Failed to register endpoint: ' + errorMsg);
         } finally {
             setSubmitting(false);
         }

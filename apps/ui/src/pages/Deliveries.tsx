@@ -31,8 +31,9 @@ const Deliveries: React.FC = () => {
         try {
             await deliveriesApi.retry(id);
             loadDeliveries();
-        } catch (err) {
-            alert('Failed to retry delivery');
+        } catch (err: any) {
+            const errorMsg = err.response?.data?.error || err.message;
+            alert('Failed to retry delivery: ' + errorMsg);
         } finally {
             setRetryingId(null);
         }

@@ -4,10 +4,18 @@ dotenv.config();
 
 import net from 'net';
 
+const databaseUrl = process.env.DATABASE_URL || 'postgres://user:password@localhost:5434/webhookdrop';
+
 export const db = new Pool({
-    connectionString: process.env.DATABASE_URL || 'postgres://user:password@localhost:5434/webhookdrop',
+    connectionString: databaseUrl,
     ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
-    // Force IPv4 because Render/Supabase IPv6 can be unreliable on some tiers
-    // We cast to any to satisfy the complex 'stream' type in node-postgres
-    stream: (options: any) => net.connect({ ...options, family: 4 }) as any
+    // Force IPv4 by manually parsing the URL and passing host/port to net.connect
+    stream: () => {
+        const url = new URL(databaseUrl);
+        return net.connect({
+            host: url.hostname,
+            port: parseInt(url.port || '5432', 10),
+            family: 4
+        }) as any;
+    }
 } as any);

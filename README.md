@@ -1,6 +1,6 @@
-# WebhookDrop 📦🚀
+# WebhookDrop 📦🚀 (Technical MVP)
 
-WebhookDrop is a **reliable, high-performance webhook delivery engine** designed to act as a "Reliable Postman" between your application and its third-party consumers. It ensures that every event is delivered, even if the receiver is temporarily offline, using a robust retry system with exponential backoff.
+WebhookDrop is a **reliable, high-fidelity MVP of a webhook delivery engine**, conceptually similar to a streamlined version of **Svix**. It acts as a "Reliable Postman" between your application and its consumers, ensuring every event is delivered with a robust, distributed retry system.
 
 ## 🌟 Key Features
 - **Reliable Delivery:** Powered by BullMQ and Redis for background job persistence.

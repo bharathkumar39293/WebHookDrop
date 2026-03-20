@@ -8,14 +8,5 @@ const databaseUrl = process.env.DATABASE_URL || 'postgres://user:password@localh
 
 export const db = new Pool({
     connectionString: databaseUrl,
-    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
-    // Force IPv4 by manually parsing the URL and passing host/port to net.connect
-    stream: () => {
-        const url = new URL(databaseUrl);
-        return net.connect({
-            host: url.hostname,
-            port: parseInt(url.port || '5432', 10),
-            family: 4
-        }) as any;
-    }
-} as any);
+    ssl: databaseUrl.includes('localhost') ? false : { rejectUnauthorized: false },
+});

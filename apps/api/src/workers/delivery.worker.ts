@@ -59,4 +59,11 @@ export const deliveryWorker = new Worker('deliveries', async (job: Job) => {
             return; // Return so BullMQ doesn't try to handle failure for a moved job
         }
     }
-}, { connection: redisConnection as any });
+}, { 
+    connection: redisConnection as any,
+    // Limit to 10 deliveries per second globally across all workers on this queue
+    limiter: {
+        max: 10,
+        duration: 1000
+    }
+});

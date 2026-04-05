@@ -8,5 +8,8 @@
         "install:all": "npm install --workspaces",
         "build": "npm run build --workspaces",
         "start": "npm run start --workspace api"
+    },
+    "engines": {
+        "node": "22.x"
     }
 }
